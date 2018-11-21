@@ -145,9 +145,9 @@ module hollowroundCornersCube(x,y,z,r,wallWidth){
 
 module roundCornersCube(x,y,z,r){
     hull(){
-        translate([x/2-r,y/2-r])cylinder(z,r,center=true);
-        translate([-x/2+r,y/2-r])cylinder(z,r,center=true);
-        translate([x/2-r,-y/2+r])cylinder(z,r,center=true);
-        translate([-x/2+r,-y/2+r])cylinder(z,r,center=true);
+        translate([x/2-r,y/2-r])cylinder(z,r=r,center=true);
+        translate([-x/2+r,y/2-r])cylinder(z,r=r,center=true);
+        translate([x/2-r,-y/2+r])cylinder(z,r=r,center=true);
+        translate([-x/2+r,-y/2+r])cylinder(z,r=r,center=true);
     }
 }
