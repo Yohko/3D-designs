@@ -22,7 +22,6 @@ num_y = 10;
 t_bottom = 4;
 height = h_hole+t_bottom;
 
-
 difference(){
     Tray();
     translate([num_x*(gap+d_vial)+gap,num_y*(gap+d_vial)+gap, 0]/2){
@@ -33,11 +32,13 @@ difference(){
     }
 }
 
+
 module Tray() {
     difference(){
         // box
         minkowski(){
-            cube([num_x*(gap+d_vial)+gap, num_y*(gap+d_vial)+gap, height]);
+            //cube([num_x*(gap+d_vial)+gap, num_y*(gap+d_vial)+gap, height]);
+            roundCornersCube(num_x*(gap+d_vial)+gap, num_y*(gap+d_vial)+gap, height,5);
             sphere(r = 2);
         }
         // holes for vials
@@ -45,5 +46,15 @@ module Tray() {
             translate([(d_vial*x)+(gap*x)-d_vial/2,(d_vial*y)+(gap*y)-d_vial/2,t_bottom])
             cylinder(r=d_vial/2, h=height);    
         }  
+    }
+}
+
+
+module roundCornersCube(x,y,z,r){
+    hull(){
+        translate([x-r,y-r,z/2])cylinder(z,r=r,center=true);
+        translate([r,y-r,z/2])cylinder(z,r=r,center=true);
+        translate([x-r,+r,z/2])cylinder(z,r=r,center=true);
+        translate([r,r,z/2])cylinder(z,r=r,center=true);
     }
 }
