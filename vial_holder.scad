@@ -17,18 +17,27 @@ h_hole = 16;
 gap = 2;
 num_x = 15;
 num_y = 10;
-
+text_size = 4.5;
 
 t_bottom = 4;
 height = h_hole+t_bottom;
 
-difference(){
-    Tray();
-    translate([num_x*(gap+d_vial)+gap,num_y*(gap+d_vial)+gap, 0]/2){
-        rotate([0,180,180]){
-            linear_extrude(2)
-            text("© 2018 Matthias H. Richter", size = 12, halign = "center", valign = "center"); 
+union(){
+    difference(){
+        Tray();
+        translate([num_x*(gap+d_vial)+gap,num_y*(gap+d_vial)+gap, 0]/2){
+            rotate([0,180,180]){
+                linear_extrude(2)
+                text("© 2018 Matthias H. Richter", size = 12, halign = "center", valign = "center"); 
+            }
         }
+    }
+    // add row letters and column numbers
+    for (x=[1:num_x]){
+        addtext(num_x-x+1,0.5-0.85/d_vial, str(x));
+    }
+    for (y=[1:num_y]){
+        addtext(num_x+0.5+0.9/d_vial,y, chr(64+y)); // 65 is A
     }
 }
 
@@ -57,4 +66,11 @@ module roundCornersCube(x,y,z,r){
         translate([x-r,+r,z/2])cylinder(z,r=r,center=true);
         translate([r,r,z/2])cylinder(z,r=r,center=true);
     }
+}
+
+
+module addtext(x,y, s){
+       translate([(d_vial*x)+(gap*x)-d_vial/2,(d_vial*y)+(gap*y)-d_vial/2,height-1])rotate([0,0,180]){
+        linear_extrude(text_size)text(s, size = 3.5, halign = "center", valign = "center"); 
+       }
 }
