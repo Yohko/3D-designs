@@ -17,7 +17,9 @@ h_hole = 16;
 gap = 2;
 num_x = 15;
 num_y = 10;
-text_size = 4.5;
+
+text_size = 4;
+text_height = 4;
 
 t_bottom = 4;
 height = h_hole+t_bottom;
@@ -71,6 +73,6 @@ module roundCornersCube(x,y,z,r){
 
 module addtext(x,y, s){
        translate([(d_vial*x)+(gap*x)-d_vial/2,(d_vial*y)+(gap*y)-d_vial/2,height-1])rotate([0,0,180]){
-        linear_extrude(text_size)text(s, size = 3.5, halign = "center", valign = "center"); 
+        linear_extrude(text_height)text(s, size = text_size, halign = "center", valign = "center"); 
        }
 }
